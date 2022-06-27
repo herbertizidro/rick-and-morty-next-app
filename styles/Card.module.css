@@ -1,0 +1,28 @@
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  margin: 12px;
+  width: 250px;
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.2);
+  background-color: #FFF;
+  color: black;
+  padding: 10px;
+}
+
+.card img{
+  cursor: pointer;
+}
+
+.character-info{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.character-name{
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}

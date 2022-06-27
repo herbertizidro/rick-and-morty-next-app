@@ -1,0 +1,18 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #70aa46;
+  height: 150px;
+  color: #fff;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.footer span {
+  font-weight: bold;
+}
+
+.footer a{
+	color: #fff;
+}

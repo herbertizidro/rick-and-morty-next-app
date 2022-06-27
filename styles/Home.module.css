@@ -1,0 +1,39 @@
+
+.generic_container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.search_container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	max-width: 100%;
+	flex-direction: column;
+	padding-top: 25px;	
+	background-color: #f9fafc;
+	background-image: url("../public/images/637645.jpg"); 
+	background-size: cover;
+	background-repeat: repeat;
+	min-height: 330px;
+}
+
+
+/* MOBILE */
+@media screen and (max-width: 500px){
+  .search_container{
+	background-position: center;
+  }
+}
+
+
+
+
+
+
+

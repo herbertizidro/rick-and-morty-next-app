@@ -1,0 +1,21 @@
+.character_container {
+  text-align: center;
+}
+
+.title {
+  margin-top: 55px;
+  font-size: 25px;
+}
+
+.character-info{
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* BORDA VERDE DAS IMAGENS */
+.img_border{
+  border: 2px solid #70aa46;
+}
+
+
+
