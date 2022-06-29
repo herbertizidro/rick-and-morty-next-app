@@ -11,18 +11,18 @@ import styles from '../styles/Home.module.css'
 
 const Home = (props) => {
 	
-	const inputRef = useRef('')	//evitar renderizações desnecessárias
-	const [searchObj, setSearchObj] = useState(null);
-	const [response, setResponse] = useState(false);
-	const [isLoading, setLoading] = useState(false);
-    const startLoading = () => setLoading(true);
-    const stopLoading = () => setLoading(false);
+   const inputRef = useRef('')	//evitar renderizações desnecessárias
+   const [searchObj, setSearchObj] = useState(null);
+   const [response, setResponse] = useState(false);
+   const [isLoading, setLoading] = useState(false);
+   const startLoading = () => setLoading(true);
+   const stopLoading = () => setLoading(false);
 	
     
     //configuração de navegação
     useEffect(() => {
         
-		Router.events.on('routeChangeStart', startLoading); 
+	Router.events.on('routeChangeStart', startLoading); 
         Router.events.on('routeChangeComplete', stopLoading);
     
         return () => {
@@ -35,17 +35,17 @@ const Home = (props) => {
 	//após a requisição ser concluída, scrolla pros resultados
     useEffect(() => {
         
-		function scrollToDiv () { 
-			let scroll_div = document.getElementById("wrapper-cards");
-			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
-		}
+	function scrollToDiv () { 
+		let scroll_div = document.getElementById("wrapper-cards");
+		scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
+	}
 
-		scrollToDiv();
+	scrollToDiv();
 		
     }, [response])
 	
 	//paginação
-	const pagginationHandler = (page) => {
+    const pagginationHandler = (page) => {
         const currentPath = props.router.pathname;
         const currentQuery = props.router.query;
         currentQuery.page = page.selected + 1;
@@ -58,7 +58,7 @@ const Home = (props) => {
     };
 	
 	// se o usuário quiser pesquisar por um personagem
-	async function getCharacterByName() {
+    async function getCharacterByName() {
 		try{
 			if(inputRef.current){
 				const api = "https://rickandmortyapi.com/api/character/?name=" + inputRef.current
@@ -122,11 +122,11 @@ const Home = (props) => {
 
 			<br/><br/>
 			
-			<div id="wrapper-cards" className={styles.generic_container}>
+			<div className={styles.generic_container}>
 				{!response && <h6>all characters</h6>}
 			</div><br/>
 			
-            <div id="wrapper-cards" className={styles.generic_container}>
+            		<div id="wrapper-cards" className={styles.generic_container}>
 				{content}            
 			</div>
 			
