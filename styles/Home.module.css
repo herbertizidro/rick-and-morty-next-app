@@ -23,6 +23,10 @@
 	min-height: 330px;
 }
 
+.search_container input, .search_container button{
+	margin-top: 50%;
+}
+
 
 /* MOBILE */
 @media screen and (max-width: 500px){
@@ -32,8 +36,9 @@
 }
 
 
-
-
-
-
-
+/* DESKTOP */
+@media screen and (min-width: 1200px){
+  .search_container{
+	min-height: 430px;
+  }
+}
