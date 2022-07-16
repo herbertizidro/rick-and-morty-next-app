@@ -37,4 +37,7 @@
   .search_container{
 	min-height: 430px;
   }
+  .search_container input, .search_container button{
+	margin-top: 100px;
+  }
 }
