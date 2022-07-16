@@ -115,8 +115,7 @@ const Home = (props) => {
     
     return (
 		<>	
-			<div className={styles.search_container}>
-				<br/><br/><br/><br/><br/><br/><br/>
+			<div className={styles.search_container}>				
 				<SearchInput value={inputRef.current} onChangeFunc={(e) => inputUpdate(e)} onClickFunc={() => getCharacterByName()} />
 			</div>
 
