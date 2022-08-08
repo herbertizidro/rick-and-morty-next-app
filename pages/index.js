@@ -40,7 +40,7 @@ const Home = (props) => {
 		scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
 	}
 
-	scrollToDiv();
+	if(searchObj) scrollToDiv();
 		
     }, [response])
 	
@@ -142,11 +142,10 @@ const Home = (props) => {
 							activeClassName={'active'}
 							containerClassName={'pagination'}
 							subContainerClassName={'pages pagination'}    
-							initialPage={0}
+							initialPage={props.router.query.page ? parseInt(props.router.query.page) - 1 : 0}
 							pageCount={props.props.totalPages}
 							pageRangeDisplayed={4}
 							onPageChange={pagginationHandler}
-							forcePage={props.props.currentPage}
 							renderOnZeroPageCount={null}
 						/>
 				</div>
