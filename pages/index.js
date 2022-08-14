@@ -13,7 +13,6 @@ const Home = (props) => {
 	
    const inputRef = useRef('')	//evitar renderizações desnecessárias
    const [searchObj, setSearchObj] = useState(null);
-   const [response, setResponse] = useState(false);
    const [isLoading, setLoading] = useState(false);
    const startLoading = () => setLoading(true);
    const stopLoading = () => setLoading(false);
@@ -42,7 +41,7 @@ const Home = (props) => {
 
 	if(searchObj) scrollToDiv();
 		
-    }, [response])
+    }, [searchObj])
 	
 	//paginação
     const pagginationHandler = (page) => {
@@ -67,7 +66,6 @@ const Home = (props) => {
 				if(responseStatus == 200){
 					const data = await response.json()
 					setSearchObj(data.results)
-					setResponse(true)
 				}else if(responseStatus == 404){
 					alert("No results found for your search.")
 				}else{
@@ -83,7 +81,6 @@ const Home = (props) => {
 	// atualiza o input value e reseta os estados relacionados à busca
 	const inputUpdate = (e) => {
 		inputRef.current = e.target.value;
-		setResponse(false)
 		setSearchObj(null)
 	}
 	
@@ -94,21 +91,21 @@ const Home = (props) => {
         content = <div id="loader-full-screen"><div id="loader"><h5>Please, wait a moment ...</h5></div></div>
     }else {
 		
-		if(response){ //usuário decidiu pesquisar por um personagem
+		if(searchObj){ //usuário decidiu pesquisar por um personagem
 			content = (
-                <>
-                    {searchObj.map((item, index) => {
-						return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />						                   
-                    })}
-                </>
+				<>
+				    {searchObj.map((item, index) => {
+								return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />						                   
+				    })}
+				</>
 			);
 		}else{ 
 			content = (
-                <>
-                    {props.props.items.map((item, index) => {
-                        return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />
-                    })}
-                </>
+				<>
+				    {props.props.items.map((item, index) => {
+					return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />
+				    })}
+				</>
 			);
 		}
     }
@@ -123,7 +120,7 @@ const Home = (props) => {
 			<br/><br/>
 			
 			<div className={styles.generic_container}>
-				{!response && <h6>all characters</h6>}
+				{!searchObj && <h6>all characters</h6>}
 			</div><br/>
 			
             		<div id="wrapper-cards" className={styles.generic_container}>
@@ -132,7 +129,7 @@ const Home = (props) => {
 			
 			<br/><br/>
 			
-			{!response && (
+			{!searchObj && (
 				<div id="paginate">
 					<ReactPaginate
 							previousLabel={'Previous'}
@@ -147,7 +144,7 @@ const Home = (props) => {
 							pageRangeDisplayed={4}
 							onPageChange={pagginationHandler}
 							renderOnZeroPageCount={null}
-						/>
+					/>
 				</div>
 			)}
 		</>
