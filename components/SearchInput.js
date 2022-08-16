@@ -10,3 +10,10 @@ export default function SearchInput(props) {
 	</div>
   )
 }
+
+/* checagem de props */
+SearchInput.propTypes = {
+  search: PropTypes.string,
+  onChangeFunc: PropTypes.func.isRequired,
+  onClickFunc: PropTypes.func.isRequired
+}
