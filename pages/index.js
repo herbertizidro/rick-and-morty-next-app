@@ -114,7 +114,7 @@ const Home = (props) => {
 		<>	
 			<div className={styles.search_container}>
 	    			<br/><br/><br/><br/><br/><br/><br/>
-				<SearchInput value={inputRef.current} onChangeFunc={(e) => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters", buttonText="Search" />
+				<SearchInput value={inputRef.current} onChangeFunc={(e) => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
 			</div>
 
 			<br/><br/>
