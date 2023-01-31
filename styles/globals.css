@@ -89,7 +89,7 @@ body{
    outline: none;
 }
 
-/* gambiarra - isso deveria estar em Card.module.css e Input.module.css, mas não funcionou e não tenho tempo */
+/* isso deveria estar em Card.module.css e Input.module.css, algum dia eu arrumo */
 .character-info{
   display: flex;
   justify-content: space-between;
