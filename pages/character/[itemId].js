@@ -30,9 +30,9 @@ export const getStaticProps = async (context) => {
 
   return {
     props: { characters: data }, 
-	//revalidate: 10, - quando é necessário atualizar informação das páginas estáticas
-	//O valor "10" significa 10 segundos de intervalo até que as páginas sejam pré-processadas novamente
-	//o fallback do getStaticPaths deve ser true ou blocking nesse caso
+	  //revalidate: 10, - quando é necessário atualizar informação das páginas estáticas
+	  //O valor "10" significa 10 segundos de intervalo até que as páginas sejam pré-processadas novamente
+	  //o fallback do getStaticPaths deve ser true ou blocking nesse caso
   }
 }
 
@@ -49,23 +49,24 @@ export default function Character(props) {
   
   return (
     <div className={styles.character_container}>
-      <h1 className={styles.title}>{props.characters.name}</h1>
-      <br/>
+      	<h1 className={styles.title}>{props.characters.name}</h1>
+	<br/>
 
-	  <Image 
-        src={props.characters.image}
-        width="200"
-        height="200"
-        alt={props.characters.name}
-		className={styles.img_border}
-      /><br/><br/>
+	<Image 
+            src={props.characters.image}
+            width="200"
+            height="200"
+            alt={props.characters.name}
+	    className={styles.img_border}
+	/>
+	<br/><br/>
  
-	  <div>
-        <span><b>Specie:</b> {props.characters.species}</span><br/>
-        <span><b>Status:</b> {props.characters.status}</span><br/>
-		<span><b>Origin:</b> {props.characters.origin.name ? props.characters.origin.name : "---"}</span><br/>
-		<span><b>Location:</b> {props.characters.location.name ? props.characters.location.name : "---"}</span>
-      </div>
+       <div>
+        	<span><b>Specie:</b> {props.characters.species}</span><br/>
+        	<span><b>Status:</b> {props.characters.status}</span><br/>
+		<span><b>Origin:</b> {props.characters.origin.name || "---"}</span><br/>
+		<span><b>Location:</b> {props.characters.location.name || "---"}</span>
+       </div>
     </div>
   )
 }
