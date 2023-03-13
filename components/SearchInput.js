@@ -10,13 +10,17 @@ export default function SearchInput(props) {
 		<button type="button" style={{backgroundColor: "#70aa46", borderColor: "#70aa46"}} className="btn btn-success rounded-0" onClick={onClickFunc}>{buttonText}</button>
 	</div>
   )
-}
+};
 
-/* checagem de props */
+SearchInput.defaultProps = {
+  search: '',
+  placeholder: '',
+};
+
 SearchInput.propTypes = {
   search: PropTypes.string,
   placeholder: PropTypes.string,
   buttonText: PropTypes.string.isRequired,	
   onChangeFunc: PropTypes.func.isRequired,
   onClickFunc: PropTypes.func.isRequired
-}
+};
