@@ -11,7 +11,7 @@ import styles from '../styles/Home.module.css'
 
 const Home = (props) => {
 	
-   const inputRef = useRef('')	//evitar renderizações desnecessárias
+   const inputRef = useRef('')
    const [searchObj, setSearchObj] = useState(null);
    const [isLoading, setLoading] = useState(false);
    const startLoading = () => setLoading(true);
