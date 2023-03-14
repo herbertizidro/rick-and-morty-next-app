@@ -31,7 +31,7 @@ const Home = (props) => {
 		
     }, [])
 	
-	//após a requisição ser concluída, scrolla pros resultados
+    //após a requisição ser concluída, scrolla pros resultados
     useEffect(() => {
         
 	function scrollToDiv () { 
@@ -43,7 +43,7 @@ const Home = (props) => {
 		
     }, [searchObj])
 	
-	//paginação
+    //paginação
     const pagginationHandler = (page) => {
         const currentPath = props.router.pathname;
         const currentQuery = props.router.query;
@@ -56,7 +56,7 @@ const Home = (props) => {
     
     };
 	
-	// se o usuário quiser pesquisar por um personagem
+    // se o usuário quiser pesquisar por um personagem
     async function getCharacterByName() {
 		try{
 			if(inputRef.current){
@@ -79,7 +79,7 @@ const Home = (props) => {
 	}
 	
 	// atualiza o input value e reseta os estados relacionados à busca
-	const inputUpdate = (e) => {
+	const inputUpdate = e => {
 		inputRef.current = e.target.value;
 		setSearchObj(null)
 	}
@@ -113,7 +113,7 @@ const Home = (props) => {
     return (
 		<>	
 			<div className={styles.search_container}>
-				<SearchInput value={inputRef.current} onChangeFunc={(e) => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
+				<SearchInput search={inputRef.current} onChangeFunc={(e) => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
 			</div>
 
 			<br/><br/>
