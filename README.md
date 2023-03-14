@@ -4,4 +4,4 @@
 
 #### este app foi feito com next js
 
-<img src="https://raw.githubusercontent.com/herbertizidro/frontend-challenge/main/screencapture-localhost-3000-2022-06-25-00_41_27.png">
+<img src="https://raw.githubusercontent.com/herbertizidro/rick-and-morty-next-app/main/screencapture%20new.png">
