@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import Link from 'next/link'
 import Router, { withRouter } from 'next/router'
@@ -11,7 +11,7 @@ import styles from '../styles/Home.module.css'
 
 const Home = (props) => {
 	
-   const inputRef = useRef('')
+   const [inputValue, setInputValue] = useState();
    const [searchObj, setSearchObj] = useState(null);
    const [isLoading, setLoading] = useState(false);
    const startLoading = () => setLoading(true);
@@ -59,8 +59,8 @@ const Home = (props) => {
     // se o usuário quiser pesquisar por um personagem
     async function getCharacterByName() {
 		try{
-			if(inputRef.current){
-				const api = "https://rickandmortyapi.com/api/character/?name=" + inputRef.current
+			if(inputValue){
+				const api = "https://rickandmortyapi.com/api/character/?name=" + inputValue
 				const response = await fetch(api)
 				const responseStatus = response.status;
 				if(responseStatus == 200){
@@ -80,7 +80,7 @@ const Home = (props) => {
 	
 	// atualiza o input value e reseta os estados relacionados à busca
 	const inputUpdate = e => {
-		inputRef.current = e.target.value;
+		setInputValue(e.target.value);
 		setSearchObj(null)
 	}
 	
@@ -102,18 +102,18 @@ const Home = (props) => {
 		}else{ 
 			content = (
 				<>
-				    {props.props.items.map((item, index) => {
+				    {props.data.items.map((item, index) => {
 					return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />
 				    })}
 				</>
 			);
 		}
     }
-    
+
     return (
 		<>	
 			<div className={styles.search_container}>
-				<SearchInput search={inputRef.current} onChangeFunc={(e) => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
+				<SearchInput search={inputValue} onChangeFunc={e => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
 			</div>
 
 			<br/><br/>
@@ -139,7 +139,7 @@ const Home = (props) => {
 							containerClassName={'pagination'}
 							subContainerClassName={'pages pagination'}    
 							initialPage={props.router.query.page ? parseInt(props.router.query.page) - 1 : 0}
-							pageCount={props.props.totalPages}
+							pageCount={props.data.totalPages}
 							pageRangeDisplayed={4}
 							onPageChange={pagginationHandler}
 							renderOnZeroPageCount={null}
@@ -160,7 +160,7 @@ Home.getInitialProps = async ({ query }) => {
 	const data = await res.json()
 	  
 	return {
-		props: {
+		data: {
 			items: data.results,
 			totalPages: data.info.pages
 		}
