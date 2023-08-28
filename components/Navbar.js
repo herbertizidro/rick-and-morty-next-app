@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
 		<div className={styles.logo}>
-			<h4><span>RickAndMorty</span> Challenge</h4>
+			<Link href="/"><h4><span>RickAndMorty</span> Challenge</h4></Link>
 		</div>
 		<ul className={styles.link_items}>
 			<li>
