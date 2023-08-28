@@ -9,19 +9,19 @@ import styles from '../styles/Home.module.css'
 
 
 
-const Home = (props) => {
+const Home = props => {
 	
    const [inputValue, setInputValue] = useState();
-   const [searchObj, setSearchObj] = useState(null);
+   const [searchResults, setSearchResults] = useState();
    const [isLoading, setLoading] = useState(false);
    const startLoading = () => setLoading(true);
    const stopLoading = () => setLoading(false);
 	
     
-    //configuração de navegação
+    // configuração de navegação
     useEffect(() => {
         
-	Router.events.on('routeChangeStart', startLoading); 
+		Router.events.on('routeChangeStart', startLoading); 
         Router.events.on('routeChangeComplete', stopLoading);
     
         return () => {
@@ -31,20 +31,22 @@ const Home = (props) => {
 		
     }, [])
 	
-    //após a requisição ser concluída, scrolla pros resultados
+	
+    // após a requisição ser concluída, scrolla pros resultados
     useEffect(() => {
         
-	function scrollToDiv () { 
-		let scroll_div = document.getElementById("wrapper-cards");
-		scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
-	}
+		function scrollToDiv () { 
+			let scroll_div = document.getElementById("wrapper-cards");
+			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
+		}
 
-	if(searchObj) scrollToDiv();
-		
-    }, [searchObj])
+		if(inputValue?.length) scrollToDiv();
+
+    }, [searchResults])
 	
-    //paginação
-    const pagginationHandler = (page) => {
+	
+    // paginação
+    const pagginationHandler = page => {
         const currentPath = props.router.pathname;
         const currentQuery = props.router.query;
         currentQuery.page = page.selected + 1;
@@ -56,79 +58,76 @@ const Home = (props) => {
     
     };
 	
+	
     // se o usuário quiser pesquisar por um personagem
     async function getCharacterByName() {
 		try{
-			if(inputValue){
-				const api = "https://rickandmortyapi.com/api/character/?name=" + inputValue
-				const response = await fetch(api)
-				const responseStatus = response.status;
-				if(responseStatus == 200){
-					const data = await response.json()
-					setSearchObj(data.results)
-				}else if(responseStatus == 404){
-					alert("No results found for your search.")
-				}else{
-					alert("Oops! Could not complete your search.")
-				}
-			}
+			if(!inputValue) return;
+			
+			const api = "https://rickandmortyapi.com/api/character/?name=" + inputValue;
+			const response = await fetch(api);
+			const responseStatus = response.status;
+			const data = await response.json();
+			
+			if(responseStatus === 200){
+				setSearchResults(data?.results);
+			}else if(responseStatus === 404){
+				alert("No results found for your search.")
+			}else{
+				alert("Oops! Could not complete your search.")
+			}		
 		}catch(e){
 			console.log(e.message)
 			alert("An internal error has occurred. Try again later.")
 		}
 	}
 	
+	
 	// atualiza o input value e reseta os estados relacionados à busca
-	const inputUpdate = e => {
+	const updateInput = e => {
+		setSearchResults();
 		setInputValue(e.target.value);
-		setSearchObj(null)
-	}
+	};
 	
 	
-	//renderização condicional dos cards de acordo com a busca
-    let content = null;
+	// renderização condicional dos cards de acordo com a busca
+    let content;
     if (isLoading){
         content = <div id="loader-full-screen"><div id="loader"><h5>Please, wait a moment ...</h5></div></div>
     }else {
 		
-		if(searchObj){ //usuário decidiu pesquisar por um personagem
+		if(searchResults){ //usuário decidiu pesquisar por um personagem
 			content = (
 				<>
-				    {searchObj.map((item, index) => {
-								return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />						                   
-				    })}
+				    {searchResults.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />)}
 				</>
 			);
-		}else{ 
+		}else{
 			content = (
 				<>
-				    {props.data.items.map((item, index) => {
-					return <Card key={index} id={item.id} name={item.name} species={item.species} image={item.image} />
-				    })}
+				    {props.data.items.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />)}
 				</>
 			);
 		}
+		
     }
+	
 
     return (
 		<>	
 			<div className={styles.search_container}>
-				<SearchInput search={inputValue} onChangeFunc={e => inputUpdate(e)} onClickFunc={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
+				<SearchInput value={inputValue} onChange={e => updateInput(e)} onClick={() => getCharacterByName()} placeholder="Search characters" buttonText="Search" />
 			</div>
 
 			<br/><br/>
 			
-			<div className={styles.generic_container}>
-				{!searchObj && <h6>all characters</h6>}
-			</div><br/>
+			<div className={styles.generic_container}>{!searchResults && <h6>all characters</h6>}</div><br/>
 			
-            		<div id="wrapper-cards" className={styles.generic_container}>
-				{content}            
-			</div>
+            <div id="wrapper-cards" className={styles.generic_container}>{content}</div>
 			
 			<br/><br/>
 			
-			{!searchObj && (
+			{!searchResults && (
 				<div id="paginate">
 					<ReactPaginate
 							previousLabel={'Previous'}
