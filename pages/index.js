@@ -21,7 +21,7 @@ const Home = props => {
     // configuração de navegação
     useEffect(() => {
         
-		Router.events.on('routeChangeStart', startLoading); 
+	Router.events.on('routeChangeStart', startLoading); 
         Router.events.on('routeChangeComplete', stopLoading);
     
         return () => {
@@ -35,12 +35,12 @@ const Home = props => {
     // após a requisição ser concluída, scrolla pros resultados
     useEffect(() => {
         
-		function scrollToDiv () { 
-			let scroll_div = document.getElementById("wrapper-cards");
-			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
-		}
+	function scrollToDiv () { 
+		let scroll_div = document.getElementById("wrapper-cards");
+		scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
+	}
 
-		if(inputValue?.length) scrollToDiv();
+	if(inputValue?.length) scrollToDiv();
 
     }, [searchResults])
 	
@@ -61,31 +61,31 @@ const Home = props => {
 	
     // se o usuário quiser pesquisar por um personagem
     async function getCharacterByName() {
-		try{
-			if(!inputValue) return;
+	try{
+		if(!inputValue) return;
 			
-			const api = "https://rickandmortyapi.com/api/character/?name=" + inputValue;
-			const response = await fetch(api);
-			const responseStatus = response.status;
-			const data = await response.json();
+		const api = "https://rickandmortyapi.com/api/character/?name=" + inputValue;
+		const response = await fetch(api);
+		const responseStatus = response.status;
+		const data = await response.json();
 			
-			if(responseStatus === 200){
-				setSearchResults(data?.results);
-			}else if(responseStatus === 404){
-				alert("No results found for your search.")
-			}else{
-				alert("Oops! Could not complete your search.")
-			}		
-		}catch(e){
-			console.log(e.message)
-			alert("An internal error has occurred. Try again later.")
-		}
+		if(responseStatus === 200){
+			setSearchResults(data?.results);
+		}else if(responseStatus === 404){
+			alert("No results found for your search.")
+		}else{
+			alert("Oops! Could not complete your search.")
+		}		
+	}catch(e){
+		console.log(e.message)
+		alert("An internal error has occurred. Try again later.")
 	}
+   }
 	
 	
 	// atualiza o input value e reseta os estados relacionados à busca
 	const updateInput = e => {
-		setSearchResults();
+		if (searchResults) setSearchResults();
 		setInputValue(e.target.value);
 	};
 	
@@ -123,7 +123,7 @@ const Home = props => {
 			
 			<div className={styles.generic_container}>{!searchResults && <h6>all characters</h6>}</div><br/>
 			
-            <div id="wrapper-cards" className={styles.generic_container}>{content}</div>
+            		<div id="wrapper-cards" className={styles.generic_container}>{content}</div>
 			
 			<br/><br/>
 			
