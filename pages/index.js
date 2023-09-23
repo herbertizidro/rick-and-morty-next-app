@@ -18,7 +18,6 @@ const Home = props => {
    const stopLoading = () => setLoading(false);
 	
     
-    // configuração de navegação
     useEffect(() => {
         
 	Router.events.on('routeChangeStart', startLoading); 
