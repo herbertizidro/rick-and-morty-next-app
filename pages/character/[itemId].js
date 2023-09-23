@@ -62,8 +62,8 @@ export default function Character(props) {
 	<br/><br/>
  
        <div>
-        	<span><b>Specie:</b> {props.characters.species}</span><br/>
-        	<span><b>Status:</b> {props.characters.status}</span><br/>
+        	<span><b>Specie:</b> {props.characters.species || "---"}</span><br/>
+        	<span><b>Status:</b> {props.characters.status || "---"}</span><br/>
 		<span><b>Origin:</b> {props.characters.origin.name || "---"}</span><br/>
 		<span><b>Location:</b> {props.characters.location.name || "---"}</span>
        </div>
