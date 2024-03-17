@@ -100,20 +100,20 @@ const Home = props => {
 	
 		{!results && (
 			<div id="paginate">
-			<ReactPaginate
-				previousLabel={'Previous'}
-				nextLabel={'Next'}
-				breakLabel={'...'}
-				breakClassName={'break-me'}
-				activeClassName={'active'}
-				containerClassName={'pagination'}
-				subContainerClassName={'pages pagination'}    
-				initialPage={props.router.query.page ? parseInt(props.router.query.page) - 1 : 0}
-				pageCount={props.data.totalPages}
-				pageRangeDisplayed={4}
-				onPageChange={pagginationHandler}
-				renderOnZeroPageCount={null}
-			/>
+				<ReactPaginate
+					previousLabel={'Previous'}
+					nextLabel={'Next'}
+					breakLabel={'...'}
+					breakClassName={'break-me'}
+					activeClassName={'active'}
+					containerClassName={'pagination'}
+					subContainerClassName={'pages pagination'}    
+					initialPage={props.router.query.page ? parseInt(props.router.query.page) - 1 : 0}
+					pageCount={props.data.totalPages}
+					pageRangeDisplayed={4}
+					onPageChange={pagginationHandler}
+					renderOnZeroPageCount={null}
+				/>
 			</div>
 		)}
 		</>
