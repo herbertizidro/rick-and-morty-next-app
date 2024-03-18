@@ -71,7 +71,7 @@ const Home = props => {
 		
 	// atualiza o input value e reseta a busca
 	const updateInput = e => {
-		if (results) setResults();
+		if (results?.length) setResults();
 		setInputValue(e.target.value);
 	};
 	
