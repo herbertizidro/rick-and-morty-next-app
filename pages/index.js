@@ -31,7 +31,7 @@ const Home = props => {
 			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'});
 		}
 	
-		if(results) scrollToDiv();
+		if(results?.length) scrollToDiv();
 	}, [results])
 		
 	// paginação
