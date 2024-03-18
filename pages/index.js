@@ -79,7 +79,7 @@ const Home = props => {
 	// renderização condicional dos cards de acordo com a busca
 	const mountContent = () => {
 		if (isLoading) return (<div id="loader-full-screen"><div id="loader"><h5>Please, wait a moment ...</h5></div></div>);
-		if (results) return results?.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />);
+		if (results?.length) return results.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />);
 		return props.data.items?.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />)
 	}
 	
