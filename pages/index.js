@@ -82,6 +82,8 @@ const Home = props => {
 		if (results?.length) return results.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />);
 		return props.data.items?.map(item => <Card key={item.id} id={item.id} name={item.name} species={item.species} image={item.image} />)
 	}
+
+	const content = mountContent();
 	
 	return (
 		<>	
@@ -96,7 +98,7 @@ const Home = props => {
 		</div>
 		<div className={styles.generic_container}>{!results && <h6>all characters</h6>}</div>
 		
-	        {<div id="wrapper-cards" className={styles.generic_container}>{mountContent()}</div>}			
+	        <div id="wrapper-cards" className={styles.generic_container}>{content}</div>	
 	
 		{!results && (
 			<div id="paginate">
